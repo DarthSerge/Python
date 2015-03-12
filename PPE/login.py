@@ -8,6 +8,8 @@ import MySQLdb
 import query
 import sha, time, Cookie, os
 
+print 'Content-Type: text/html\n'
+
 # Connexion a la base de donnees
 
 form = cgi.FieldStorage() 
@@ -38,7 +40,6 @@ def header() :
 
 	# Debut de la page web
 
-	print 'Content-Type: text/html\n'
 	print '<head>\n'
 	print '<meta charset="utf-8">\n'
 	print '<title>Gestion des utilisateurs</title>\n'
@@ -63,7 +64,7 @@ def sessionCookie() :
 		admin = query.checkAdmin(form.getvalue('login'))
 
 		cookie['sid'] = sid
-		#cookie['admin'] = admin
+		cookie['admin'] = admin
 
 		# Date d'expiration (en secondes)
 
@@ -75,7 +76,7 @@ def sessionCookie() :
 
 		cookie.load(string_cookie)
 		sid = cookie['sid'].value
-		#admin = cookie['admin'].value
+		admin = cookie['admin'].value
 
 	print cookie
 
@@ -85,10 +86,12 @@ def forms() :
 	+ '<input type="text" name="login" placeholder="Entrez votre login"/><br />' \
 	+ '<input type="password" name="mdp" placeholder="Entrez votre mot de passe"/><br />' \
 	+ '<input type="hidden" name="action" value="connect"/>' \
-	+ '<input type="submit" value="Se connecter" />'
+	+ '<input type="submit" value="Se connecter" />' \
+	+ '</form>'
 
 	htmlFormPassOublie = '<form action="passoublie.py" method="post"><br />' \
-	+ '<input type="submit" value="Mot de passe oublie" />'
+	+ '<input type="submit" value="Mot de passe oublie" />' \
+	+ '</form>'
 
 	print (htmlFormConnect)
 	print (htmlFormPassOublie)
