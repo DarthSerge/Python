@@ -1,5 +1,4 @@
 #!C:\Python27\python.exe
-
 import smtplib
 from email.mime.text import MIMEText
 from smtplib import SMTPException
