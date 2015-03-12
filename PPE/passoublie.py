@@ -25,20 +25,25 @@ def printHead():
 def main():
 
     if action == 'valid' :
+
         IdRetour = query.recupId(emailrecup)
+
         if IdRetour != 0 :
+
            genererpass.sendnewpasswordemail(IdRetour)
+
         else :
+
             print "Adresse email inconnue"
+
     else :
+
         print "<FORM ACTION='passoublie.py' METHOD='get'>"
         print "<P>Email :</P>"
         print "<P><INPUT NAME='email' SIZE=20 MAXLENGTH=20 TYPE='text'></P>"
         print "<INPUT TYPE='submit' NAME='send' VALUE='Valider'>"
         print '<INPUT TYPE="hidden" VALUE="valid" NAME="action">'
         print "</FORM></body></html>"
-
-
 
 printHead()
 main()
