@@ -6,9 +6,10 @@ cgitb.enable()
 import cgi
 import MySQLdb
 
+#Ouvre la connection à la base de données
 def MySQLConnect() :
 
-	db = MySQLdb.connect("localhost", "root", "", "utilisateurs")
+	return MySQLdb.connect("localhost", "root", "", "utilisateurs")
 
 def checkInjection(pString) :
 	temp = ""
@@ -20,17 +21,27 @@ def checkInjection(pString) :
 
 	return temp
 
-def queryConnection(pLogin,pMdp) :
+#Test les identifiants de connection
+def connection(pLogin,pMdp) :
 
-	db = MySQLdb.connect("localhost", "root", "", "utilisateurs")
+	db = MySQLConnect()
 
   	sql	= "SELECT id FROM utilisateur WHERE prenom = Login AND password = MD5(Mdp)"
-
   	sql = sql.replace("Login","'" + pLogin + "'")
   	sql = sql.replace("Mdp","'" + pMdp +"'")
 
 	cursor = db.cursor()
-
 	cursor.execute(sql)
 
 	return(cursor.fetchone() != None)
+
+#Met à jour la table avec le mot de passe temporaire
+def updatePassword(pNewMdp,pId) :
+
+	db = MySQLConnect()
+
+  	sql	= "UPDATE utilisateur SET password = NewMdp WHERE id = " + pId
+  	sql = sql.replace("NewMdp","'" + pNewMdp + "'")
+ 
+	cursor = db.cursor()
+	cursor.execute(sql)

@@ -5,7 +5,7 @@ from smtplib import SMTPException
 
 EMAIL_SUBJECT = "Mot de passe oublie"
 EMAIL_FROM = "ndeye@lenouveauparisdakar.fr"
-EMAIL_RECEIVERS = ['ndeye.coundoune@gmail.com']
+EMAIL_RECEIVERS = ['capitolin.terry@live.fr']
 
 def listToStr(lst):
     """This method makes comma separated list item string"""
