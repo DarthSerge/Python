@@ -16,12 +16,14 @@ emailrecup = form.getvalue('email')
 print "Content-Type: text/html\n"
 
 def printHead():
+
     print"<!doctype html>"
     print"<html><head>"
     print"<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"
     print"</head><body>"
 
 def main():
+    
     if action == 'valid' :
         if recupidbdd() :
            genererpass.sendnewpasswordemail()

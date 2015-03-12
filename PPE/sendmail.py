@@ -8,10 +8,12 @@ EMAIL_FROM = "ndeye@lenouveauparisdakar.fr"
 EMAIL_RECEIVERS = ['capitolin.terry@live.fr']
 
 def listToStr(lst):
+
     """This method makes comma separated list item string"""
     return ','.join(lst)
 
 def send_email(msg):
+  
     """This method sends an email"""
     msg_header = "From: " + EMAIL_FROM + "\n" + \
                  "To: " + listToStr(EMAIL_RECEIVERS) + "\n" + \
