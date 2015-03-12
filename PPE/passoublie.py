@@ -23,11 +23,11 @@ def printHead():
     print"</head><body>"
 
 def main():
-
+    
     if action == 'valid' :
-        IdRetour = query.recupId(emailrecup)
-        if IdRetour != 0 :
-           genererpass.sendnewpasswordemail(IdRetour)
+        if recupidbdd() :
+           genererpass.sendnewpasswordemail()
+           query.updatePassword()
         else :
             print "Adresse email inconnue"
     else :
@@ -38,7 +38,15 @@ def main():
         print '<INPUT TYPE="hidden" VALUE="valid" NAME="action">'
         print "</FORM></body></html>"
 
+def recupidbdd():
+ 
+    sql = "SELECT id FROM utilisateur WHERE not(admin) AND email = emailrecup"
+    sql = sql.replace("emailrecup","'" + emailrecup + "'")
 
+    cursor = db.cursor()
+    cursor.execute(sql)
+
+    return(cursor.fetchone() != None)
 
 printHead()
 main()

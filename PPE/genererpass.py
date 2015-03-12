@@ -3,7 +3,6 @@
 import hashlib
 from getpass import getpass
 from random import choice
-import query
 
 def genererpass():
 	letter1=["a","b","c","d"]
@@ -13,12 +12,9 @@ def genererpass():
 	# genere un mot de passe aleatoire
 	return(choice(letter1)+choice(number1)+choice(letter2)+choice(symbol1)+choice(letter1)+choice(number1))
 
-def sendnewpasswordemail(pId):
+def sendnewpasswordemail():
     from sendmail import send_email
-
-    NewPass = genererpass()
-    send_email("Votre nouveau mot de passe : " + str(NewPass))
-    query.updatePassword(NewPass,pId)
+    send_email(genererpass())
 
 def crypter(password1):
     password1_chiffre=hashlib.sha1(password1).hexdigest()
