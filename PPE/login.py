@@ -25,11 +25,8 @@ def printForm():
 		login = query.checkInjection(form.getvalue('login'))
 		mdp = query.checkInjection(form.getvalue('mdp'))
 
-		print login
-		print mdp
-
 		if query.queryConnection(login,mdp) : 
-			print "Connection"
+			print "Connection" #Mettre ici l'accès à la page utilisateur.py avec la gestion des SESSION
 		else :
 			print "Try harder"    
 	else :

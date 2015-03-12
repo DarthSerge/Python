@@ -24,17 +24,13 @@ def queryConnection(pLogin,pMdp) :
 
 	db = MySQLdb.connect("localhost", "root", "", "utilisateurs")
 
-  	sql	= "PREPARE check_id " \
-		+ "FROM 'SELECT id FROM utilisateur WHERE prenom = ? AND password = ?'; " \
-		+ "SET @login = '" + pLogin + "'; " \
-  		+ "SET @mdp = '" + pMdp + "'; " \
-		+ "EXECUTE check_id USING @login , @mdp; "
+  	sql	= "SELECT id FROM utilisateur WHERE prenom = Login AND password = MD5(Mdp)"
+
+  	sql = sql.replace("Login","'" + pLogin + "'")
+  	sql = sql.replace("Mdp","'" + pMdp +"'")
+
 	cursor = db.cursor()
 
 	cursor.execute(sql)
 
-	print cursor.rowcount
-
-	print sql
-
-	return(cursor.rowcount != 0)
+	return(cursor.fetchone() != None)

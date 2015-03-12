@@ -5,6 +5,7 @@ cgitb.enable()
 
 import cgi
 import MySQLdb
+import query
 
 def printHead():
     
