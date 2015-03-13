@@ -7,6 +7,7 @@ import cgi
 import MySQLdb
 import query
 import sha, time, Cookie, os
+import urllib2
 
 # Initialisation
 
@@ -25,7 +26,7 @@ def start() :
 		if user != -1:
 
 			sessionCookie(user)
-			print 'Location:utilisateurs.py'
+			print "Location: utilisateurs.py\r\n"
 
 		else :
 

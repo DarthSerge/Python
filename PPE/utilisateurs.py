@@ -39,11 +39,13 @@ def checkSessionCookie() :
 
 	else :
 
-		return cookie
+		return string_cookie
 
 def afficheFormulaire(pCookie):
 
-	if pCookie['admin'] :
+	print pCookie[6]
+
+	if pCookie[6] == 1 :
 
 		if action == 'mod':
 			uid = form.getvalue('id')
@@ -77,7 +79,7 @@ def afficheFormulaire(pCookie):
 		else:
 			htmlForm += '<input type="submit" value="Ajouter" />'
 
-		print (htmlForm)
+		print htmlForm
 
 def deleteUtilisateur():
 
