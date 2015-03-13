@@ -11,11 +11,21 @@ def MySQLConnect() :
 	return MySQLdb.connect("localhost", "root", "", "utilisateurs")
 
 def checkInjection(pString) :
+
+	if pString == None :
+
+		return ""
+
 	temp = ""
+
 	for char in pString :
+
 		if char == "'" :
+
 			temp += "\\" + char
+
 		else :
+
 			temp += char
 
 	return temp
@@ -24,25 +34,33 @@ def connection(pLogin,pMdp) :
 
 	db = MySQLConnect()
 
-  	sql	= "SELECT id FROM utilisateur WHERE prenom = Login AND password = MD5(Mdp)"
+	sql	= "SELECT id, admin FROM utilisateur WHERE email = Login AND password = MD5(Mdp)"
 
-  	sql = sql.replace("Login","'" + pLogin + "'")
-  	sql = sql.replace("Mdp","'" + pMdp +"'")
+	sql = sql.replace("Login","'" + pLogin + "'")
+	sql = sql.replace("Mdp","'" + pMdp +"'")
 
 	cursor = db.cursor()
 
 	cursor.execute(sql)
 
-	return(cursor.fetchone() != None)
+	row = cursor.fetchone()
+
+	if row == None :
+
+		return -1
+
+	else :
+
+		return row[1]
 
 def updatePassword(pNewMdp,pId) :
 
 	db = MySQLConnect()
 
-  	sql	= "UPDATE utilisateur SET password = MD5(NewMdp) WHERE id = " + str(pId)
+	sql	= "UPDATE utilisateur SET password = MD5(NewMdp) WHERE id = " + str(pId)
 
-  	sql = sql.replace("NewMdp","'" + pNewMdp + "'")
- 
+	sql = sql.replace("NewMdp","'" + pNewMdp + "'")
+
 	cursor = db.cursor()
 
 	cursor.execute(sql)
@@ -50,16 +68,21 @@ def updatePassword(pNewMdp,pId) :
 def recupId(pEmail):
 
 	db = MySQLConnect()
- 
- 	sql = "SELECT id FROM utilisateur WHERE not(admin) AND email = emailrecup"
 
- 	sql = sql.replace("emailrecup","'" + pEmail + "'")
+	sql = "SELECT id FROM utilisateur WHERE not(admin) AND email = emailRecup"
 
-   	cursor = db.cursor()
+	sql = sql.replace("emailRecup","'" + pEmail + "'")
 
-   	cursor.execute(sql)
+	cursor = db.cursor()
 
-	if cursor.fetchone() != None :
-		return cursor.fetchone()
-   	else :
-   		return 0
+	cursor.execute(sql)
+
+	row = cursor.fetchone()
+
+	if row == None :
+
+		return 0
+
+	else :
+
+		return row[0]
