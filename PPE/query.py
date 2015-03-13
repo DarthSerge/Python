@@ -11,6 +11,7 @@ def MySQLConnect() :
 	return MySQLdb.connect("localhost", "root", "", "utilisateurs")
 
 def checkInjection(pString) :
+
 	if pString == None :
 
 		return ""
@@ -76,10 +77,12 @@ def recupId(pEmail):
 
 	cursor.execute(sql)
 
-	if cursor.fetchone() != None :
+	row = cursor.fetchone()
 
-		return cursor.fetchone()
+	if row == None :
+
+		return 0
 
 	else :
 
-		return 0
+		return row[0]

@@ -30,7 +30,7 @@ def start() :
 		else :
 
 			entete()
-			print '<div>Login et/ou mot de passe incorrect !</div>'
+			print '<div id="errorLog">Login et/ou mot de passe incorrect !</div>'
 
 	else :
 

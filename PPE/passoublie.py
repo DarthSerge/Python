@@ -23,7 +23,7 @@ def entete() :
 	print '<title>Gestion des utilisateurs</title>\n'
 	print '</head>\n'
 
-def form():
+def validation() :
 
 	if action == 'valid' :
 
@@ -35,23 +35,28 @@ def form():
 
 		else :
 
-			print 'Adresse email inconnue'
+			print '<div id="errorPass">Adresse email inconnue !</div>'
+			form()
 
 	else :
 
-		htmlForm = '<div id="bloc"><form action="login.py" method="post">' \
-		+ '<h1>Gestion des utilisateurs</h1>' \
-		+ '<p>Mot de passe oublie</p>' \
-		+ '<div><label>Addresse email :<span>saisir une addresse valide</span></label><input type="text" name="email"/></div>' \
-		+ '<input type="hidden" name="action" value="valid"/>' \
-		+ '<input type="submit" value="Valider" id="boutonConnexion"/>' \
-		+ '</form>'
+		form()
 
-		print htmlForm
+def form() :
 
-		print '</div>'
+	htmlForm = '<div id="bloc"><form action="passoublie.py" method="post">' \
+	+ '<h1>Gestion des utilisateurs</h1>' \
+	+ '<p>Mot de passe oublie</p>' \
+	+ '<div><label>Addresse email :<span>saisir une addresse valide</span></label><input type="text" name="email"/></div>' \
+	+ '<input type="hidden" name="action" value="valid"/>' \
+	+ '<input type="submit" value="Valider" id="boutonConnexion"/>' \
+	+ '</form>'
+
+	print htmlForm
+
+	print '</div>'
 
 entete()
-form()
+validation()
 
 

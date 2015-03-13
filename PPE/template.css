@@ -57,7 +57,7 @@ html {
 }
 
 #bloc #boutonConnexion {
-	margin-left: 150px;
+	margin-left: 140px;
 	width: 125px;
 	height: 31px;
 	background: #666666;
@@ -69,7 +69,7 @@ html {
 }
 
 #bloc #boutonPassoublie {
-	margin-left: 100px;
+	margin-left: 90px;
 	width: 225px;
 	height: 31px;
 	background: #666666;
@@ -78,4 +78,20 @@ html {
 	color: #FFFFFF;
 	font-size: 11px;
 	font-weight: bold;
+}
+
+div#errorLog {
+	position: absolute;
+	top: 250px;
+	left: 42pc;
+	font-weight: bold;
+	color: #BC0026;
+}
+
+div#errorPass {
+	position: absolute;
+	top: 195px;
+	left: 45pc;
+	font-weight: bold;
+	color: #BC0026;
 }
