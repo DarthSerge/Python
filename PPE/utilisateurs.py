@@ -14,7 +14,7 @@ db = query.MySQLConnect()
 form = cgi.FieldStorage() 
 action = form.getvalue('action')
 
-def header() :
+def entete() :
 
 	# Debut de la page web
 
@@ -182,7 +182,7 @@ def printUtilisateurs():
 	print '</table>'
 
 cookie = checkSessionCookie()
-header()
+entete()
 afficheFormulaire(cookie)
 insertUtilisateur()
 deleteUtilisateur()

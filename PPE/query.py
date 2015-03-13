@@ -33,7 +33,7 @@ def connection(pLogin,pMdp) :
 
 	db = MySQLConnect()
 
-	sql	= "SELECT id FROM utilisateur WHERE email = Login AND password = MD5(Mdp)"
+	sql	= "SELECT id, admin FROM utilisateur WHERE email = Login AND password = MD5(Mdp)"
 
 	sql = sql.replace("Login","'" + pLogin + "'")
 	sql = sql.replace("Mdp","'" + pMdp +"'")
@@ -42,7 +42,15 @@ def connection(pLogin,pMdp) :
 
 	cursor.execute(sql)
 
-	return(cursor.fetchone() != None)
+	row = cursor.fetchone()
+
+	if row == None :
+
+		return -1
+
+	else :
+
+		return row[1]
 
 def updatePassword(pNewMdp,pId) :
 
@@ -61,26 +69,6 @@ def recupId(pEmail):
 	db = MySQLConnect()
 
 	sql = "SELECT id FROM utilisateur WHERE not(admin) AND email = emailRecup"
-
-	sql = sql.replace("emailRecup","'" + pEmail + "'")
-
-	cursor = db.cursor()
-
-	cursor.execute(sql)
-
-	if cursor.fetchone() != None :
-
-		return cursor.fetchone()
-
-	else :
-
-		return 0
-
-def checkAdmin(pEmail):
-
-	db = MySQLConnect()
-
-	sql = "SELECT admin FROM utilisateur WHERE email = emailRecup"
 
 	sql = sql.replace("emailRecup","'" + pEmail + "'")
 

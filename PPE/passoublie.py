@@ -8,44 +8,50 @@ import MySQLdb
 import genererpass
 import query
 
-db = MySQLdb.connect("localhost", "root", "", "utilisateurs")
 form = cgi.FieldStorage()
 action = form.getvalue('action')
 emailrecup = form.getvalue('email')
 
-print "Content-Type: text/html\n"
+def entete() :
 
-def printHead():
+	# Debut de la page web
 
-    print"<!doctype html>"
-    print"<html><head>"
-    print"<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />"
-    print"</head><body>"
+	print 'Content-Type: text/html\n'
+	print '<head>\n'
+	print '<meta charset="utf-8">\n'
+	print '<link rel="stylesheet" type="text/css" href="template.css">\n'
+	print '<title>Gestion des utilisateurs</title>\n'
+	print '</head>\n'
 
-def main():
+def form():
 
-    if action == 'valid' :
+	if action == 'valid' :
 
-        IdRetour = query.recupId(emailrecup)
+		IdRetour = query.recupId(emailrecup)
 
-        if IdRetour != 0 :
+		if IdRetour != 0 :
 
-           genererpass.sendnewpasswordemail(IdRetour)
+			genererpass.sendnewpasswordemail(IdRetour)
 
-        else :
+		else :
 
-            print "Adresse email inconnue"
+			print 'Adresse email inconnue'
 
-    else :
+	else :
 
-        print "<FORM ACTION='passoublie.py' METHOD='get'>"
-        print "<P>Email :</P>"
-        print "<P><INPUT NAME='email' SIZE=20 MAXLENGTH=20 TYPE='text'></P>"
-        print "<INPUT TYPE='submit' NAME='send' VALUE='Valider'>"
-        print '<INPUT TYPE="hidden" VALUE="valid" NAME="action">'
-        print "</FORM></body></html>"
+		htmlForm = '<div id="bloc"><form action="login.py" method="post">' \
+		+ '<h1>Gestion des utilisateurs</h1>' \
+		+ '<p>Mot de passe oublie</p>' \
+		+ '<div><label>Addresse email :<span>saisir une addresse valide</span></label><input type="text" name="email"/></div>' \
+		+ '<input type="hidden" name="action" value="valid"/>' \
+		+ '<input type="submit" value="Valider" id="boutonConnexion"/>' \
+		+ '</form>'
 
-printHead()
-main()
+		print htmlForm
+
+		print '</div>'
+
+entete()
+form()
 
 
